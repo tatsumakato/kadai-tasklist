@@ -2,15 +2,15 @@
 
 @section('content')
 
-    <h1>メッセージ一覧</h1>
+    <h1>task list</h1>
 
     @if (count($tasks) > 0)
         <ul>
-            @foreach ($messages as $message)
-                <li>{!! link_to_route('messages.show', $message->id, ['id' => $message->id]) !!} : {{ $message->content }}</li>
+            @foreach ($tasks as $task)
+                <li>{!! link_to_route('tasks.show', $task->id, ['id' => $task->id]) !!} : {{ $task->status }} , {{ $task->content }}</li>
             @endforeach
         </ul>
     @endif
-    {!! link_to_route('messages.create', '新規メッセージの投稿') !!}
+    {!! link_to_route('tasks.create', 'create new task') !!}
 
 @endsection
