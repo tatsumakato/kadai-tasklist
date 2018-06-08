@@ -1,3 +1,4 @@
+
 <ul class="media-list">
 @foreach ($tasks as $task)
     <?php $user = $task->user; ?>
@@ -9,16 +10,15 @@
             <div>
                 {!! link_to_route('users.show', $user->name, ['id' => $user->id]) !!} <span class="text-muted">posted at {{ $task->created_at }}</span>
             </div>
-            <div>
+
+            <div class="btn-toolbar">
+                @if (Auth::user()->id == $task->user_id)
                 <p>status: {!! nl2br(e($task->status)) !!}</p>
                 <p>task: {!! nl2br(e($task->content)) !!}</p>
-            </div>
-            <div>
-                @if (Auth::user()->id == $task->user_id)
                     {!! Form::open(['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
-                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
+                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs active glyphicon glyphicon-fire']) !!}
                     {!! Form::close() !!}
-                    {!! link_to_route('tasks.edit', 'Edit', ['id' => $task->id], ['class' => 'btn btn-primary btn-xs active glyphicon glyphicon-pencil inline']) !!}
+                    {!! link_to_route('tasks.edit', 'Edit', ['id' => $task->id], ['class' => 'btn btn-primary btn-xs active glyphicon glyphicon-pencil ']) !!}
                 @endif
             </div>
         </div>
@@ -26,3 +26,4 @@
 @endforeach
 </ul>
 {!! $tasks->render() !!}
+
